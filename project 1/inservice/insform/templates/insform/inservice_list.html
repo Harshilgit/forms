@@ -1,0 +1,50 @@
+{% extends "insform/base.html" %}
+
+
+{% block content %}
+<table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <td>Name</td>
+            <td>Make</td>
+            <td>Sr No</td>
+            <td>Referance Name</td>
+            <td>Make</td>
+            <td>Sr No</td>
+
+
+
+            <td>
+                <a href="{% url 'inservice_insert' %}" class="btn btn-outline-success">
+                    <i class="fas fa-plus"></i> Add New
+                </a>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for inservice in inservice_list %}
+            <tr>
+                <td>{{inservice.eqname}}</td>
+                <td>{{inservice.make1}}</td>
+                <td>{{inservice.srno1}}</td>
+                <td>{{inservice.referancename}}</td>
+                <td>{{inservice.make2}}</td>
+                <td>{{inservice.srno2}}</td>
+
+                <td>
+                    <a href="{% url 'inservice_update' inservice.id %}" class="btn text-secondary px-0">
+                        <i class="far fa-edit fa-lg"></i>
+                    </a>
+                    <form action="{% url 'inservice_delete' inservice.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">
+                            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
