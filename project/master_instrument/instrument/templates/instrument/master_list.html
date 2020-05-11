@@ -1,0 +1,61 @@
+{% extends "instrument/base.html" %}
+
+{% block content %}
+<table class="table" style="width: auto;" style="background-color: lightskyblue;">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <td>Name</td>
+            <td>Make</td>
+            <td>Model</td>
+            <td>Range</td>
+            <td>L.C.</td>
+            <td>U.C.</td>
+            <td>Id No</td>
+            <td>Sr No</td>
+            <td>Cal Date</td>
+            <td>Cal Due Date</td>
+            <td>Lab</td>
+            <td>Cert No</td>
+            
+
+
+            <td>
+                <a href="{% url 'master_insert' %}" class="btn btn-outline-success">
+                    <i class="fas fa-plus"></i> Add 
+                </a>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for master in master_list %}
+            <tr>
+                <td>{{master.mastername}}</td>
+                <td>{{master.make}}</td>
+                <td>{{master.model}}</td>
+                <td>{{master.rng}}</td>
+                <td>{{master.leastcount}}</td>
+                <td>{{master.uncertainity}}</td>
+                <td>{{master.idno}}</td>
+                <td>{{master.srno}}</td>
+                <td>{{master.calibrationdate}}</td>
+                <td>{{master.calibrationduedate}}</td>
+                <td>{{master.lab}}</td>
+                <td>{{master.certificateno}}</td>
+
+                <td>
+                    <a href="{% url 'master_update' master.id %}" class="btn text-secondary px-0">
+                        <i class="far fa-edit fa-lg"></i>
+                    </a>
+                    <form action="{% url 'master_delete' master.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">
+                            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
